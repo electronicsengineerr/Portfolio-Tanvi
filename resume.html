@@ -16,6 +16,8 @@ html, body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #f6c8c8, #ffe6e6);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -59,7 +61,7 @@ main {
   flex: 1;
   width: 90%;
   max-width: 850px;
-  margin: 60px auto;
+  margin: 40px auto;
   text-align: center;
 }
 .resume-card {
@@ -92,6 +94,8 @@ main {
   position: relative;
   z-index: 1;
 }
+
+/* Buttons */
 .btn-resume {
   border-radius: 50px;
   padding: 12px 35px;
@@ -99,6 +103,7 @@ main {
   margin: 10px;
   transition: all 0.3s ease;
   text-decoration: none;
+  cursor: pointer; /* Hand cursor */
 }
 .btn-resume i {
   margin-right: 8px;
@@ -127,6 +132,7 @@ footer {
   text-align: center;
   padding: 12px;
   font-size: 0.9rem;
+  margin-top: auto; /* Stick to bottom */
 }
 
 /* Responsive */
@@ -181,7 +187,7 @@ footer {
     <div class="info-box">
       <i class="bi bi-info-circle-fill"></i>
       The <strong>View</strong> button opens the resume in a new browser tab, while the <strong>Download</strong> button saves a copy to your device.
-      <br><strong>Note:</strong> Make sure <code>resume.pdf</code> is in the same folder as this HTML file.
+      <br>Make sure <code>resume.pdf</code> is in the same folder as this HTML file.
     </div>
   </div>
 </main>
