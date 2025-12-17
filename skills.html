@@ -1,12 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanvi Nitin Babar | Skills</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+/* ================= RESET & LAYOUT ================= */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: #f6f6f6;
+}
+
+/* ================= HEADER ================= */
+header {
+  background-color: #f6c8c8;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+header .header-links a {
+  color: #1f1f1f;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+header .header-links a:hover {
+  color: #fff;
+  background-color: #2a2a2a;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+header .header-links a.active {
+  color: #fff;
+  background-color: #1f1f1f;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* ================= SKILLS ================= */
+.skills-section {
+  width: 95%;
+  max-width: 1100px;
+  margin: 50px auto;
+}
+
+.skill-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  height: 100%;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.skill-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background-color: #2a2a2a;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header .header-links {
+    margin-top: 10px;
+  }
+}
+</style>
 </head>
 <body>
-    <h1>content updating soon</h1>
-    <a href="index.html">Back</a>
+
+<!-- Header -->
+<header>
+  <div class="brand-name">Tanvi Nitin Babar</div>
+  <div class="header-links">
+    <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+    <a href="about.html"><i class="bi bi-person"></i> About</a>
+    <a href="education.html"><i class="bi bi-book"></i> Education</a>
+    <a href="skills.html"><i class="bi bi-tools"></i> Skills</a>
+    <a href="projects.html"><i class="bi bi-folder"></i> Projects</a>
+    <a href="resume.html"><i class="bi bi-file-earmark-person"></i> Resume</a>
+    <a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
+  </div>
+</header>
+
+<!-- Skills Section -->
+<section class="skills-section">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">My Skills</h2>
+    <p class="text-muted">Click on a skill to view details</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="skill-card" onclick="openPopup('Manual Testing', manualTesting)">
+        <div class="skill-icon text-primary">🧪</div>
+        <h5>Manual Testing</h5>
+        <button class="btn btn-outline-dark mt-3">View Details</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="skill-card" onclick="openPopup('SQL', sqlSkill)">
+        <div class="skill-icon text-success">🗄️</div>
+        <h5>SQL</h5>
+        <button class="btn btn-outline-success mt-3">View Details</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="skill-card" onclick="openPopup('Selenium WebDriver (Java)', seleniumSkill)">
+        <div class="skill-icon text-warning">🤖</div>
+        <h5>Selenium WebDriver</h5>
+        <button class="btn btn-outline-warning mt-3">View Details</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="skill-card" onclick="openPopup('JIRA', jiraSkill)">
+        <div class="skill-icon text-danger">📌</div>
+        <h5>JIRA</h5>
+        <button class="btn btn-outline-danger mt-3">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="skillModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="popupTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="popupContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  © 2025 Tanvi Nitin Babar | All Rights Reserved
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Page Highlight -->
+<script>
+  const links = document.querySelectorAll('header .header-links a');
+  const current = window.location.pathname.split('/').pop();
+  links.forEach(link => {
+    if (link.getAttribute('href') === current) {
+      link.classList.add('active');
+    }
+  });
+
+  const manualTesting = `
+    <ul>
+      <li>SDLC & STLC knowledge</li>
+      <li>Test case & scenario writing</li>
+      <li>Smoke, Sanity & Regression testing</li>
+      <li>Bug reporting & tracking</li>
+    </ul>`;
+
+  const sqlSkill = `
+    <ul>
+      <li>CRUD operations</li>
+      <li>Joins, subqueries</li>
+      <li>Constraints & normalization</li>
+      <li>Backend testing</li>
+    </ul>`;
+
+  const seleniumSkill = `
+    <ul>
+      <li>Selenium WebDriver with Java</li>
+      <li>Locators & waits</li>
+      <li>Handling alerts & frames</li>
+      <li>Basic TestNG</li>
+    </ul>`;
+
+  const jiraSkill = `
+    <ul>
+      <li>Bug lifecycle</li>
+      <li>Agile workflow</li>
+      <li>Scrum boards</li>
+      <li>Team collaboration</li>
+    </ul>`;
+
+  function openPopup(title, content) {
+    document.getElementById('popupTitle').innerText = title;
+    document.getElementById('popupContent').innerHTML = content;
+    new bootstrap.Modal(document.getElementById('skillModal')).show();
+  }
+</script>
+
 </body>
 </html>
