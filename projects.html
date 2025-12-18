@@ -21,14 +21,13 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: #f6f6f6;
 }
 
 /* ================= HEADER ================= */
 header {
   background-color: #f6c8c8;
-  padding: 15px 30px;
+  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,32 +37,67 @@ header {
   z-index: 1000;
 }
 
-header .brand-name {
+.brand-name {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
 
-header .header-links a {
+.header-links a {
   color: #1f1f1f;
-  margin-left: 20px;
+  margin-left: 18px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
 }
 
-header .header-links a:hover {
-  color: #fff;
-  background-color: #2a2a2a;
-  padding: 6px 12px;
-  border-radius: 8px;
-}
-
-header .header-links a.active {
-  color: #fff;
+.header-links a.active {
   background-color: #1f1f1f;
+  color: #fff;
   padding: 6px 12px;
   border-radius: 8px;
+}
+
+/* Hamburger */
+.menu-btn {
+  font-size: 1.9rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100%;
+  background-color: #2a2a2a;
+  padding: 20px;
+  transition: 0.3s;
+  z-index: 2000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: #fff;
+  margin: 15px 0;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.sidebar a i {
+  margin-right: 10px;
+}
+
+.close-btn {
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: right;
+  cursor: pointer;
 }
 
 /* ================= PROJECTS ================= */
@@ -78,7 +112,7 @@ header .header-links a.active {
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
   padding: 30px;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .project-card:hover {
@@ -99,33 +133,53 @@ footer {
   background-color: #2a2a2a;
   color: #fff;
   text-align: center;
-  padding: 15px 0;
-  font-size: 0.9rem;
+  padding: 15px;
   margin-top: auto;
 }
 
+/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
+  .header-links {
+    display: none;
   }
-  header .header-links { margin-top: 10px; }
+  .menu-btn {
+    display: block;
+  }
 }
 </style>
 </head>
 <body>
 
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="close-btn" onclick="toggleMenu()">
+    <i class="bi bi-x-lg"></i>
+  </div>
+  <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+  <a href="about.html"><i class="bi bi-person"></i> About</a>
+  <a href="education.html"><i class="bi bi-book"></i> Education</a>
+  <a href="skills.html"><i class="bi bi-tools"></i> Skills</a>
+  <a href="projects.html"><i class="bi bi-folder"></i> Projects</a>
+  <a href="resume.html"><i class="bi bi-file-earmark-person"></i> Resume</a>
+  <a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
+</div>
+
 <!-- Header -->
 <header>
   <div class="brand-name">Tanvi Nitin Babar</div>
+
   <div class="header-links">
     <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
     <a href="about.html"><i class="bi bi-person"></i> About</a>
     <a href="education.html"><i class="bi bi-book"></i> Education</a>
     <a href="skills.html"><i class="bi bi-tools"></i> Skills</a>
-    <a href="projects.html"><i class="bi bi-folder"></i> Projects</a>
+    <a href="projects.html" class="active"><i class="bi bi-folder"></i> Projects</a>
     <a href="resume.html"><i class="bi bi-file-earmark-person"></i> Resume</a>
     <a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
+  </div>
+
+  <div class="menu-btn" onclick="toggleMenu()">
+    <i class="bi bi-list"></i>
   </div>
 </header>
 
@@ -164,11 +218,11 @@ footer {
         </div>
       </div>
 
-      <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-        <button class="btn btn-outline-dark mb-2 w-100" onclick="openModal('Test Cases', testCases)">
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <button class="btn btn-outline-dark w-100 mb-2" onclick="openModal('Test Cases', testCases)">
           <i class="bi bi-list-check"></i> View Test Cases
         </button>
-        <button class="btn btn-outline-primary mb-2 w-100" onclick="openModal('Bug Reports', bugReports)">
+        <button class="btn btn-outline-primary w-100 mb-2" onclick="openModal('Bug Reports', bugReports)">
           <i class="bi bi-bug"></i> View Bug Reports
         </button>
         <button class="btn btn-outline-success w-100" onclick="openModal('Project Modules', modules)">
@@ -201,55 +255,50 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  const testCases = `
-    <ul>
-      <li>User login & authentication validation</li>
-      <li>Upload notes with valid/invalid file formats</li>
-      <li>Role-based access for admin and users</li>
-      <li>Search & filter resources</li>
-      <li>Notification & download flow validation</li>
-      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#testCaseModal">
-  <i class="bi bi-list-check"></i> For More Detailed Report Click Here
-</button>
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
 
-    </ul>`;
+const testCases = `
+<ul>
+  <li>User login & authentication validation</li>
+  <li>Upload notes with valid/invalid file formats</li>
+  <li>Role-based access for admin and users</li>
+  <li>Search & filter resources</li>
+  <li>Notification & download flow validation</li>
+  <button class="btn btn-primary btn-sm mt-2">
+    <i class="bi bi-list-check"></i> For More Detailed Report Click Here
+  </button>
+</ul>`;
 
-  const bugReports = `
-    <ul>
-      <li>File upload failure for large file sizes</li>
-      <li>UI misalignment on mobile screens</li>
-      <li>Duplicate notification issue</li>
-      <li>Session timeout issue after inactivity</li>
-         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#testCaseModal">
-  <i class="bi bi-list-check"></i> For More Detailed Report Click Here
-</button>
-    </ul>`;
+const bugReports = `
+<ul>
+  <li>File upload failure for large file sizes</li>
+  <li>UI misalignment on mobile screens</li>
+  <li>Duplicate notification issue</li>
+  <li>Session timeout issue</li>
+  <button class="btn btn-primary btn-sm mt-2">
+    <i class="bi bi-bug"></i> For More Detailed Report Click Here
+  </button>
+</ul>`;
 
-  const modules = `
-    <ul>
-      <li>User Registration & Login</li>
-      <li>Admin Dashboard</li>
-      <li>Notes Upload & Download</li>
-      <li>Search & Recommendation Module</li>
-      <li>Notification System</li>
-         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#testCaseModal">
-  <i class="bi bi-list-check"></i> For More Detailed Report Click Here
-</button>
-    </ul>`;
+const modules = `
+<ul>
+  <li>User Registration & Login</li>
+  <li>Admin Dashboard</li>
+  <li>Notes Upload & Download</li>
+  <li>Search & Recommendation Module</li>
+  <li>Notification System</li>
+  <button class="btn btn-primary btn-sm mt-2">
+    <i class="bi bi-diagram-3"></i> For More Detailed Report Click Here
+  </button>
+</ul>`;
 
-  function openModal(title, content) {
-    document.getElementById('modalTitle').innerText = title;
-    document.getElementById('modalContent').innerHTML = content;
-    new bootstrap.Modal(document.getElementById('projectModal')).show();
-  }
-
-  const links = document.querySelectorAll('header .header-links a');
-  const current = window.location.pathname.split('/').pop();
-  links.forEach(link => {
-    if (link.getAttribute('href') === current) {
-      link.classList.add('active');
-    }
-  });
+function openModal(title, content) {
+  document.getElementById('modalTitle').innerText = title;
+  document.getElementById('modalContent').innerHTML = content;
+  new bootstrap.Modal(document.getElementById('projectModal')).show();
+}
 </script>
 
 </body>

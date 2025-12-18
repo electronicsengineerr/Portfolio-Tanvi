@@ -17,142 +17,178 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   background-color: #f6f6f6;
 }
 
 /* ================= HEADER ================= */
 header {
-  background-color: #f6c8c8; /* faint red */
-  padding: 15px 30px;
+  background-color: #c7a4a4;
+  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-/* Brand Name */
-header .brand-name {
+.brand-name {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
 }
 
-/* Header Links */
-header .header-links a {
+/* Header links */
+.header-links a {
+  margin-left: 18px;
   color: #1f1f1f;
-  margin-left: 20px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
 }
 
-header .header-links a:hover {
+.header-links a:hover,
+.header-links a.active {
+  background: #1f1f1f;
   color: #fff;
-  background-color: #2a2a2a;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
 }
 
-/* Active Page Link */
-header .header-links a.active {
+/* Hamburger */
+.menu-btn {
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 250px;
+  height: 100%;
+  background: #2a2a2a;
+  padding: 20px;
+  transition: 0.3s;
+  z-index: 2000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar a {
+  display: block;
   color: #fff;
-  background-color: #1f1f1f;
-  padding: 6px 12px;
-  border-radius: 8px;
+  text-decoration: none;
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+.sidebar a i {
+  margin-right: 10px;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  text-align: right;
 }
 
 /* ================= MAIN ================= */
 main {
-  flex: 1;
-  width: 90%;
+  flex: 1; /* IMPORTANT for footer */
   max-width: 900px;
   margin: 40px auto;
   text-align: center;
 }
 
-/* Intro Section */
+/* Intro */
 .intro-section h2 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 10px;
+  font-size: 2.4rem;
 }
 
-.intro-section p.subtitle {
-  font-size: 1.3rem;
+.subtitle {
+  font-size: 1.2rem;
   color: #555;
+}
+
+/* Social icons in body */
+.body-social-icons {
+  margin: 25px 0;
+}
+
+.body-social-icons a {
+  font-size: 1.8rem;
+  margin: 0 15px;
+  color: #1f1f1f;
+}
+
+.body-social-icons a:hover {
+  color: #000;
+}
+
+/* Profile card */
+.profile-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   margin-bottom: 25px;
 }
 
-/* Career Objective Card */
+/* Career card */
 .career-card {
-  background-color: #fff;
+  background: #fff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   text-align: left;
 }
 
-.career-card h3 {
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.career-card ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  line-height: 1.7;
-}
-
-.career-card li {
-  margin-bottom: 8px;
-}
-
-/* Buttons */
-.btn-custom {
-  margin-top: 15px;
-}
-
 /* ================= FOOTER ================= */
 footer {
-  background-color: #2a2a2a;
+  background: #2a2a2a;
   color: #fff;
   text-align: center;
   padding: 12px;
-  font-size: 0.9rem;
-  margin-top: auto;
 }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
+  .header-links {
+    display: none;
   }
-  header .header-links {
-    margin-top: 10px;
-  }
-  .intro-section h2 {
-    font-size: 2rem;
-  }
-  .intro-section p.subtitle {
-    font-size: 1.1rem;
+  .menu-btn {
+    display: block;
   }
 }
 </style>
 </head>
 <body>
 
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="close-btn" onclick="toggleMenu()"><i class="bi bi-x-lg"></i></div>
+  <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
+  <a href="about.html"><i class="bi bi-person"></i> About</a>
+  <a href="education.html"><i class="bi bi-book"></i> Education</a>
+  <a href="skills.html"><i class="bi bi-tools"></i> Skills</a>
+  <a href="projects.html"><i class="bi bi-folder"></i> Projects</a>
+  <a href="resume.html"><i class="bi bi-file-earmark-person"></i> Resume</a>
+  <a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
+</div>
+
 <!-- Header -->
 <header>
   <div class="brand-name">Tanvi Nitin Babar</div>
+
   <div class="header-links">
     <a href="index.html"><i class="bi bi-house-door"></i> Home</a>
     <a href="about.html"><i class="bi bi-person"></i> About</a>
@@ -162,28 +198,41 @@ footer {
     <a href="resume.html"><i class="bi bi-file-earmark-person"></i> Resume</a>
     <a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
   </div>
+
+  <div class="menu-btn" onclick="toggleMenu()">
+    <i class="bi bi-list"></i>
+  </div>
 </header>
 
-<!-- Main Content -->
+<!-- Main -->
 <main>
   <div class="intro-section">
     <h2>Hello, I'm Tanvi Babar</h2>
     <p class="subtitle">Software Testing Enthusiast & QA Aspirant</p>
   </div>
 
+  <!-- Social Icons in Body -->
+  <div class="body-social-icons">
+    <a href="https://github.com/" target="_blank"><i class="bi bi-github"></i></a>
+    <a href="https://linkedin.com/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    <a href="https://twitter.com/" target="_blank"><i class="bi bi-twitter"></i></a>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <h3>Profile Summary</h3>
+    <p>QA fresher with strong manual testing fundamentals and hands-on project experience.</p>
+  </div>
+
+  <!-- Career Objective -->
   <div class="career-card">
     <h3>Career Objective</h3>
     <ul>
-      <li>Aspiring <strong>Software Tester</strong> with strong attention to detail.</li>
-      <li>B.Tech graduate in <strong>Electronics & Telecommunication Engineering</strong>.</li>
-      <li>Good understanding of <strong>Manual Testing, SDLC, STLC</strong>.</li>
-      <li>Experienced in <strong>writing test cases, scenarios, and bug reports</strong>.</li>
-      <li>Quick learner, passionate about software quality assurance.</li>
-      <li>Looking for an opportunity to grow in QA and automation testing.</li>
+      <li>Aspiring Software Tester with strong attention to detail</li>
+      <li>Understanding of Manual Testing, SDLC, STLC</li>
+      <li>Experience in test cases & bug reports</li>
+      <li>Quick learner and team player</li>
     </ul>
-    <a href="contact.html" class="btn btn-dark btn-custom"><i class="bi bi-envelope-fill"></i> Contact Me</a>
-    <a href="projects.html" class="btn btn-primary btn-custom"><i class="bi bi-folder-fill"></i> My Projects</a>
-    <a href="resume.html" class="btn btn-success btn-custom"><i class="bi bi-file-earmark-person"></i> My Resume</a>
   </div>
 </main>
 
@@ -192,18 +241,10 @@ footer {
   © 2025 Tanvi Nitin Babar | All Rights Reserved
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- JS to Highlight Current Page -->
 <script>
-  const links = document.querySelectorAll('header .header-links a');
-  const current = window.location.pathname.split("/").pop();
-  links.forEach(link => {
-    if(link.getAttribute('href') === current){
-      link.classList.add('active');
-    }
-  });
+function toggleMenu() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
 </script>
 
 </body>
